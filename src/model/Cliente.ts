@@ -20,19 +20,16 @@ export class Cliente {
      * @param cpf CPF do cliente
      * @param telefone Telefone do cliente
      */
-    constructor(
-        nome: string,
-        cpf: string,
-        telefone: string
-    ) {
+    constructor(nome: string, cpf: string, telefone: string) {
         this.nome = nome;
         this.cpf = cpf;
         this.telefone = telefone;
     }
 
     /* Métodos get e set */
+
     /**
-     * Recupera o identificador do cliente
+     * Recupera o identificador do cliente.
      * @returns o identificador do cliente
      */
     public getIdCliente(): number {
@@ -40,8 +37,8 @@ export class Cliente {
     }
 
     /**
-     * Atribui um valor ao identificador do cliente
-     * @param idCliente novo identificado do cliente
+     * Atribui um valor ao identificador do cliente.
+     * @param idCliente Novo identificado do cliente
      */
     public setIdCliente(idCliente: number): void {
         this.idCliente = idCliente;
@@ -49,7 +46,7 @@ export class Cliente {
 
     /**
      * Retorna o nome do cliente.
-     *
+     * 
      * @returns {string} O nome do cliente.
      */
     public getNome(): string {
@@ -59,7 +56,7 @@ export class Cliente {
     /**
      * Define o nome do cliente.
      * 
-     * @param nome - O nome do cliente a ser definido.
+     * @param nome O nome a ser definido para o cliente.
      */
     public setNome(nome: string): void {
         this.nome = nome;
@@ -67,7 +64,7 @@ export class Cliente {
 
     /**
      * Retorna o CPF do cliente.
-     *
+     * 
      * @returns {string} O CPF do cliente.
      */
     public getCpf(): string {
@@ -77,7 +74,7 @@ export class Cliente {
     /**
      * Define o CPF do cliente.
      * 
-     * @param cpf - O CPF do cliente a ser definido.
+     * @param cpf O CPF a ser definido para o cliente.
      */
     public setCpf(cpf: string): void {
         this.cpf = cpf;
@@ -85,7 +82,7 @@ export class Cliente {
 
     /**
      * Retorna o telefone do cliente.
-     *
+     * 
      * @returns {string} O telefone do cliente.
      */
     public getTelefone(): string {
@@ -95,59 +92,9 @@ export class Cliente {
     /**
      * Define o telefone do cliente.
      * 
-     * @param telefone - O telefone do cliente a ser definido.
+     * @param telefone O telefone a ser definido para o cliente.
      */
     public setTelefone(telefone: string): void {
         this.telefone = telefone;
-    }
-
-    /* Métodos de operações com clientes */
-
-    /**
-     * Lista os dados do cliente.
-     *
-     * @returns {string} Informações do cliente.
-     */
-    public listagemCliente(): string {
-        return `Cliente ID: ${this.idCliente}, Nome: ${this.nome}, CPF: ${this.cpf}, Telefone: ${this.telefone}`;
-    }
-
-    /**
-     * Cadastra um novo cliente.
-     * 
-     * @param nome Nome do cliente
-     * @param cpf CPF do cliente
-     * @param telefone Telefone do cliente
-     */
-    public cadastroCliente(nome: string, cpf: string, telefone: string): void {
-        this.setNome(nome);
-        this.setCpf(cpf);
-        this.setTelefone(telefone);
-        console.log("Cliente cadastrado com sucesso!");
-    }
-
-    /**
-     * Remove um cliente.
-     */
-    public removerCliente(): void {
-        console.log(`Cliente ${this.nome} removido com sucesso!`);
-        this.idCliente = 0;
-        this.nome = '';
-        this.cpf = '';
-        this.telefone = '';
-    }
-
-    /**
-     * Atualiza os dados de um cliente.
-     * 
-     * @param nome Novo nome do cliente
-     * @param cpf Novo CPF do cliente
-     * @param telefone Novo telefone do cliente
-     */
-    public atualizarCliente(nome: string, cpf: string, telefone: string): void {
-        this.setNome(nome);
-        this.setCpf(cpf);
-        this.setTelefone(telefone);
-        console.log("Cliente atualizado com sucesso!");
     }
 }
