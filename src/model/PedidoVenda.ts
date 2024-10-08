@@ -1,126 +1,122 @@
 /**
- * Classe que representa um carro.
+ * Classe que representa um pedido de venda.
  */
-export class Carro {
+export class PedidoVenda {
 
     /* Atributos */
+    /* Identificador do pedido */
+    private idPedido: number = 0;
     /* Identificador do carro */
-    private idCarro: number = 0;
-    /* marca do carro */
-    private marca: string;
-    /* modelo do carro */
-    private modelo: string;
-    /* ano de fabrição do carro */
-    private ano: number;
-    /* cor do carro */
-    private cor: string;
+    private idCarro: number;
+    /* Identificador do cliente */
+    private idCliente: number;
+    /* Data do pedido */
+    private dataPedido: Date;
+    /* Valor do pedido */
+    private valorPedido: number;
 
     /**
-     * Construtor da classe Carro
+     * Construtor da classe PedidoVenda
      * 
-     * @param marca Marca do carro
-     * @param modelo Modelo do carro
-     * @param ano Ano de fabricação do carro
-     * @param cor Cor do carro
+     * @param idCarro Identificador do carro
+     * @param idCliente Identificador do cliente
+     * @param dataPedido Data do pedido
+     * @param valorPedido Valor do pedido
      */
-    constructor(
-        marca: string,
-        modelo: string,
-        ano: number,
-        cor: string
-    ) {
-        this.marca = marca;
-        this.modelo = modelo;
-        this.ano = ano;
-        this.cor = cor;
+    constructor(idCarro: number, idCliente: number, dataPedido: Date, valorPedido: number) {
+        this.idCarro = idCarro;
+        this.idCliente = idCliente;
+        this.dataPedido = dataPedido;
+        this.valorPedido = valorPedido;
     }
 
     /* Métodos get e set */
+
     /**
-     * Recupera o identificador do carro
-     * @returns o identificador do carro
+     * Recupera o identificador do pedido.
+     * @returns o identificador do pedido
+     */
+    public getIdPedido(): number {
+        return this.idPedido;
+    }
+
+    /**
+     * Atribui um valor ao identificador do pedido.
+     * @param idPedido Novo identificador do pedido
+     */
+    public setIdPedido(idPedido: number): void {
+        this.idPedido = idPedido;
+    }
+
+    /**
+     * Retorna o identificador do carro.
+     * 
+     * @returns {number} O identificador do carro.
      */
     public getIdCarro(): number {
         return this.idCarro;
     }
 
     /**
-     * Atribui um valor ao identificador do carro
-     * @param idCarro novo identificado do carro
+     * Define o identificador do carro.
+     * 
+     * @param idCarro O identificador do carro a ser definido.
      */
     public setIdCarro(idCarro: number): void {
         this.idCarro = idCarro;
     }
 
     /**
-     * Retorna a marca do carro.
-     *
-     * @returns {string} A marca do carro.
-     */
-    public getMarca(): string {
-        return this.marca;
-    }
-
-    /**
-     * Define a marca do carro.
+     * Retorna o identificador do cliente.
      * 
-     * @param marca - A marca do carro a ser definida.
+     * @returns {number} O identificador do cliente.
      */
-    public setMarca(marca: string): void {
-        this.marca = marca;
+    public getIdCliente(): number {
+        return this.idCliente;
     }
 
     /**
-     * Retorna o modelo do carro.
-     *
-     * @returns {string} O modelo do carro.
-     */
-    public getModelo(): string {
-        return this.modelo;
-    }
-
-    /**
-     * Define o modelo do carro.
-     *
-     * @param modelo - O nome do modelo do carro.
-     */
-    public setModelo(modelo: string): void {
-        this.modelo = modelo;
-    }
-
-    /**
-     * Retorna o ano do carro.
-     *
-     * @returns O ano do carro.
-     */
-    public getAno(): number {
-        return this.ano;
-    }
-
-    /**
-     * Define o ano do carro.
+     * Define o identificador do cliente.
      * 
-     * @param ano - O ano a ser definido para o carro.
+     * @param idCliente O identificador do cliente a ser definido.
      */
-    public setAno(ano: number): void {
-        this.ano = ano;
+    public setIdCliente(idCliente: number): void {
+        this.idCliente = idCliente;
     }
 
     /**
-     * Retorna a cor do carro.
-     *
-     * @returns {string} A cor do carro.
-     */
-    public getCor(): string {
-        return this.cor;
-    }
-
-    /**
-     * Define a cor do carro.
+     * Retorna a data do pedido.
      * 
-     * @param cor - A nova cor do carro.
+     * @returns {Date} A data do pedido.
      */
-    public setCor(cor: string): void {
-        this.cor = cor;
+    public getDataPedido(): Date {
+        return this.dataPedido;
+    }
+
+    /**
+     * Define a data do pedido.
+     * 
+     * @param dataPedido A nova data do pedido.
+     */
+    public setDataPedido(dataPedido: Date): void {
+        this.dataPedido = dataPedido;
+    }
+
+    /**
+     * Retorna o valor do pedido.
+     * 
+     * @returns {number} O valor do pedido.
+     */
+    public getValorPedido(): number {
+        return this.valorPedido;
+    }
+
+    /**
+     * Define o valor do pedido.
+     * 
+     * @param valorPedido O valor do pedido a ser definido.
+     */
+    public setValorPedido(valorPedido: number): void {
+        this.valorPedido = valorPedido;
     }
 }
