@@ -11,7 +11,7 @@ export class PedidoVenda {
      */
     private idPedido: number = 0;
     /**
-     * Identificador do carro associado ao pedido de venda.
+     * Identificador do pedidovenda associado ao pedido de venda.
      */
     private idCarro: number;
     /**
@@ -29,7 +29,7 @@ export class PedidoVenda {
 
     /**
      * Construtor da classe PedidoVenda.
-     * @param idCarro - Identificador do carro.
+     * @param idpedidovenda - Identificador do pedidovenda.
      * @param idCliente - Identificador do cliente.
      * @param dataPedido - Data do pedido.
      * @param valorPedido - Valor do pedido.
@@ -57,20 +57,12 @@ export class PedidoVenda {
         this.idPedido = idPedido;
     }
 
-    /**
-     * Obtém o identificador do carro.
-     * @returns O identificador do carro.
-     */
-    public getIdCarro(): number {
-        return this.idCarro;
-    }
-
-    /**
-     * Define o identificador do carro.
-     * @param idCarro - Novo identificador do carro.
-     */
     public setIdCarro(idCarro: number): void {
         this.idCarro = idCarro;
+    }
+
+    public getIdCarro(): number {
+        return this.idCarro;
     }
 
     /**
@@ -139,7 +131,7 @@ export class PedidoVenda {
 
             respostaBD.rows.forEach((linha) => {
                 const novoPedidoVenda = new PedidoVenda(
-                    linha.id_carro,
+                    linha.id_pedidovenda,
                     linha.id_cliente,
                     linha.data_pedido,
                     parseFloat(linha.valor_pedido)
@@ -208,6 +200,38 @@ export class PedidoVenda {
         } catch (error) {
             // imprime outra mensagem junto com o erro
             console.log('Erro ao remover o Pedido de Venda. Verifique os logs para mais detalhes.');
+            // imprime o erro no console
+            console.log(error);
+            // retorno um valor falso
+            return false;
+        }
+    }
+    static async atualizarPedidoVenda(pedidovenda: PedidoVenda): Promise<boolean> {
+        try {
+            // query para fazer update de um Pedido de Venda no banco de dados
+            const queryUpdatePedidovenda = `UPDATE PedidoVenda
+                                        SET idCliente = ${pedidovenda.getIdCliente()}, 
+                                            idCarro = ${pedidovenda.getIdCarro()}, 
+                                            Data_pedido = '${pedidovenda.getDataPedido()}', 
+                                            Valor_pedido = ${pedidovenda.getValorPedido()}
+                                        WHERE id_pedidovenda = ${pedidovenda.getIdPedido()};`;
+
+            // executa a query no banco e armazena a resposta
+            const respostaBD = await database.query(queryUpdatePedidovenda);
+
+            // verifica se a quantidade de linhas modificadas é diferente de 0
+            if (respostaBD.rowCount != 0) {
+                console.log(`Pedido de venda atualizado com sucesso! ID do Pedido de venda: ${pedidovenda.getIdPedido()}`);
+                // true significa que a atualização foi bem sucedida
+                return true;
+            }
+            // false significa que a atualização NÃO foi bem sucedida.
+            return false;
+
+            // tratando o erro
+        } catch (error) {
+            // imprime outra mensagem junto com o erro
+            console.log('Erro ao atualizar o pedido de venda. Verifique os logs para mais detalhes.');
             // imprime o erro no console
             console.log(error);
             // retorno um valor falso

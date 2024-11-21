@@ -29,17 +29,17 @@ export class ClienteController extends Cliente {
             
             return res.status(200).json(listaDeClientes);
         } catch (error) {
-            console.log('Erro ao acessar listagem de carros');
-            return res.status(400).json({ mensagem: "Não foi possível acessar a listagem de carros" });
+            console.log('Erro ao acessar listagem de Clientes');
+            return res.status(400).json({ mensagem: "Não foi possível acessar a listagem de Clientes" });
         }
     }
 
     static async novo(req: Request, res: Response): Promise<Response> {
         try {
-            // recuperando informações do corpo da requisição e colocando em um objeto da interface CarroDTO
+            // recuperando informações do corpo da requisição e colocando em um objeto da interface ClienteDTO
             const clienteRecebido: ClienteDTO = req.body;
 
-            // instanciando um objeto do tipo carro com as informações recebidas
+            // instanciando um objeto do tipo Cliente com as informações recebidas
             const novoCliente = new Cliente(clienteRecebido.nome, 
                                         clienteRecebido.cpf, 
                                         clienteRecebido.telefone);
@@ -88,6 +88,41 @@ export class ClienteController extends Cliente {
 
             // retorna uma mensagem de erro há quem chamou a mensagem
             return res.status(400).json({ mensagem: "Não foi possível remover o cliente. Entre em contato com o administrador do sistema." });
+        }
+    }
+    static async atualizar(req: Request, res: Response): Promise<Response> {
+        try {
+            // recuperando o id do Cliente que será atualizado
+            const idCliente = parseInt(req.params.idCliente as string);
+
+            // recuperando as informações do Cliente que serão atualizadas
+            const ClienteRecebido: ClienteDTO = req.body;
+
+            // instanciando um objeto do tipo Cliente com as informações recebidas
+            const ClienteAtualizado = new Cliente(ClienteRecebido.nome,
+                ClienteRecebido.cpf,
+                ClienteRecebido.telefone);
+
+            // setando o id do Cliente que será atualizado
+            ClienteAtualizado.setIdCliente(idCliente);
+
+            // chamando a função de atualização de Cliente
+            const resposta = await Cliente.atualizarCliente(ClienteAtualizado);
+
+            // verificando a resposta da função
+            if (resposta) {
+                // retornar uma mensagem de sucesso
+                return res.status(200).json({ mensagem: "Cliente atualizado com sucesso!" });
+            } else {
+                // retorno uma mensagem de erro
+                return res.status(400).json({ mensagem: "Erro ao atualizar o Cliente. Entre em contato com o administrador do sistema." })
+            }
+        } catch (error) {
+            // lança uma mensagem de erro no console
+            console.log(`Erro ao atualizar um Cliente. ${error}`);
+
+            // retorna uma mensagem de erro há quem chamou a mensagem
+            return res.status(400).json({ mensagem: "Não foi possível atualizar o Cliente. Entre em contato com o administrador do sistema." });
         }
     }
 }

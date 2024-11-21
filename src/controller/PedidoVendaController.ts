@@ -89,6 +89,42 @@ class PedidoVendaController extends PedidoVenda {
             return res.status(400).json({ mensagem: "Não foi possível remover o Pedido de Venda. Entre em contato com o administrador do sistema." });
         }
     }
+    static async atualizar(req: Request, res: Response): Promise<Response> {
+        try {
+            // recuperando o id do pedido de venda que será atualizado
+            const idPedido = parseInt(req.params.idPedido as string);
+
+            // recuperando as informações do Pedido de venda que serão atualizadas
+            const PedidoVendaRecebido: PedidoVendaDTO = req.body;
+
+            // instanciando um objeto do tipo pedido de venda com as informações recebidas
+            const PedidoVendaAtualizado = new PedidoVenda(PedidoVendaRecebido.idCliente,
+                PedidoVendaRecebido.idCarro,
+                PedidoVendaRecebido.dataPedido,
+                PedidoVendaRecebido.valorPedido);
+
+            // setando o id do carro que será atualizado
+            PedidoVendaAtualizado.setIdPedido(idPedido);
+
+            // chamando a função de atualização de carro
+            const resposta = await PedidoVenda.atualizarPedidoVenda(PedidoVendaAtualizado);
+
+            // verificando a resposta da função
+            if (resposta) {
+                // retornar uma mensagem de sucesso
+                return res.status(200).json({ mensagem: "Carro atualizado com sucesso!" });
+            } else {
+                // retorno uma mensagem de erro
+                return res.status(400).json({ mensagem: "Erro ao atualizar o pedido de venda. Entre em contato com o administrador do sistema." })
+            }
+        } catch (error) {
+            // lança uma mensagem de erro no console
+            console.log(`Erro ao atualizar um pedido de venda. ${error}`);
+
+            // retorna uma mensagem de erro há quem chamou a mensagem
+            return res.status(400).json({ mensagem: "Não foi possível atualizar o pedido. Entre em contato com o administrador do sistema." });
+        }
+    }
 }
 
 export default PedidoVendaController;
